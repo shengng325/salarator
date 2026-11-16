@@ -2,6 +2,8 @@
 
 Open `index.html` in your browser. It is a self-contained page with no dependencies, backend, API keys, tracking, or build step.
 
+All value inputs accept arithmetic using `+`, `-`, `*`, `/` and parentheses, for example `(8000 * 13) / 12`. Expressions calculate live and remain saved after refresh.
+
 Enter either gross monthly salary in SGD or MYR using its currency selector. Values are converted to local currency before calculating tax and contributions. All inputs and currency selections are saved locally for your next visit. Switch Malaysia between resident progressive income tax and the approved Returning Expert Programme 15% rate. Results include after-tax salary, employee contributions, take-home pay, employer contributions, and total compensation. Switch results between monthly and annual, and expand the assumptions to edit the illustrative exchange rate.
 
 ## Assumptions

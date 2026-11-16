@@ -14,12 +14,16 @@ function load(){
 }
 let page=load();const original=page.results.innerHTML;
 assert.ok(page.results.innerHTML.includes('SG, +3,000<small>+60.0%</small>'));
-page.my.value='5000';page.mycurrency.value='SGD';page.my.input();
+page.my.value='4000 + 1000';page.mycurrency.value='SGD';page.my.input();
 assert.equal(page.results.innerHTML,original,'Malaysia SGD input gives same taxes and contributions as equivalent MYR salary');
 page.sg.value='32000';page.sgcurrency.value='MYR';page.sg.input();
 assert.equal(page.results.innerHTML,original,'Singapore MYR input gives same taxes and CPF as equivalent SGD salary');
-page=load();assert.equal(page.mycurrency.value,'SGD');assert.equal(page.sgcurrency.value,'MYR');assert.equal(page.results.innerHTML,original);
+page=load();assert.equal(page.my.value,'4000 + 1000');assert.equal(page.mycurrency.value,'SGD');assert.equal(page.sgcurrency.value,'MYR');assert.equal(page.results.innerHTML,original);
 page.fx.value='2';page.fx.input();assert.ok(page.results.innerHTML.includes('<td>RM 10,000.00<small>S$ 5,000.00</small></td>'));
 page.currency.value='SGD';page.currency.input();assert.ok(page.results.innerHTML.includes('<td>S$ 5,000.00<small>RM 10,000.00</small></td>'));
 page.period.value='12';page.period.input();assert.ok(page.results.innerHTML.includes('<td>S$ 60,000.00<small>RM 120,000.00</small></td>'));
 console.log('UI logic checks passed: input currency equivalence, saved currencies, exchange rate, display currency and annual results.');
+
+page.my.value='5000 / 0';page.my.input();assert.equal(page.error.hidden,false);assert.equal(page.results.innerHTML,'');
+page.my.value='(4000 + 1000)';page.my.input();assert.equal(page.error.hidden,true);assert.ok(page.results.innerHTML.includes('Gross salary'));
+console.log('Expression UI checks passed: saved expressions restore, invalid results clear, valid edits recover.');
