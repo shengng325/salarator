@@ -1,0 +1,31 @@
+const {readFileSync}=require('node:fs');
+const vm=require('node:vm');
+const assert=require('node:assert/strict');
+const html=readFileSync('index.html','utf8');
+const context={};vm.createContext(context);vm.runInContext(html.match(/<script id="calculations">([\s\S]*?)<\/script>/)[1],context);
+const run=s=>vm.runInContext(s,context);
+assert.equal(run('progressive(40000, SG_BANDS)'),550);
+assert.equal(run('progressive(100000, MY_BANDS)'),9400);
+assert.equal(run('calculate(10000, "SG").employee'),1600);
+assert.equal(run('calculate(10000, "SG").employer'),1360);
+assert.equal(run('calculate(10000, "SG").tax'),5627/12);
+assert.equal(run('calculate(10000, "MY", "rep").tax'),16050/12);
+assert.equal(run('calculate(0, "MY").takeHome'),0);
+assert.equal(run('calculate(0, "SG").takeHome'),0);
+assert.equal(run('calculate(5000, "MY").employer'),650);
+assert.equal(run('calculate(5001, "MY").employer'),600.12);
+for(const country of ['SG','MY']) for(const salary of [0,200,600,750,1000,5000,8000,20000,100000]){
+ const r=run(`calculate(${salary}, '${country}')`);
+ assert.ok(Math.abs(r.takeHome+r.employee+r.tax-salary)<1e-8);
+ assert.equal(r.total,salary+r.employer);
+ assert.ok(r.takeHome>=0);
+}
+console.log('Calculation checks passed: tax brackets, REP, CPF ceiling, EPF rates, zero and low wages, reconciliation.');
+assert.equal(run('difference(1800,1000).country'),'SG');
+assert.equal(run('difference(1800,1000).amount'),800);
+assert.equal(run('difference(1800,1000).percent'),80);
+assert.equal(run('difference(1000,1800).country'),'MY');
+assert.equal(run('difference(1000,1000).country'),null);
+assert.equal(run('difference(1000,0).percent'),null);
+assert.equal(run('difference(0,0).amount'),0);
+console.log('Difference checks passed: SG higher, MY higher, percentage baseline, equal and zero values.');
