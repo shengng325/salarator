@@ -5,10 +5,10 @@ assert.ok(html.includes('id="mycurrency"'),'Malaysia salary currency selector ex
 const code=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');
 let saved=null;
 function load(){
- const defaults={sg:'8000',my:'20000',sgrelief:'0',myrelief:'0',fx:'4',mode:'progressive',period:'1',currency:'local',sgcurrency:'SGD',mycurrency:'MYR'};
- const options={mode:['progressive','rep'],period:['1','12'],currency:['local','SGD','MYR'],sgcurrency:['SGD','MYR'],mycurrency:['MYR','SGD']};
+ const defaults={sg:'8000',my:'20000',sgrelief:'0',myrelief:'0',fx:'4',mode:'progressive',period:'1',currency:'local',sgcurrency:'SGD',mycurrency:'MYR',fxmode:'manual'};
+ const options={mode:['progressive','rep'],period:['1','12'],currency:['local','SGD','MYR'],sgcurrency:['SGD','MYR'],mycurrency:['MYR','SGD'],fxmode:['manual','auto']};
  const els=Object.fromEntries(Object.entries(defaults).map(([id,value])=>[id,{value,tagName:options[id]?'SELECT':'INPUT',options:(options[id]||[]).map(value=>({value})),checkValidity(){return Number.isFinite(Number(this.value))&&Number(this.value)>=(id==='fx'?0.0001:0)},addEventListener(_,fn){this.input=fn}}]));
- els['difference-heading']={};els.error={};els.results={replaceChildren(){this.innerHTML=''}};
+ els.fxstatus={};els['difference-heading']={};els.error={};els.results={replaceChildren(){this.innerHTML=''}};
  const ctx={localStorage:{getItem:()=>saved,setItem:(_,value)=>saved=value},document:{getElementById:id=>els[id],querySelectorAll:()=>Object.keys(defaults).map(id=>els[id])}};
  vm.runInNewContext(code,ctx);return els;
 }

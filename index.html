@@ -6,32 +6,36 @@
 <title>Across the Causeway · Salary comparison</title>
 <style>
 :root{color-scheme:light;--ink:#173d37;--muted:#60736d;--line:#dce5de;--green:#186b52}*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1050px;margin:auto;padding:54px 24px}header{margin-bottom:30px}.eyebrow{text-transform:uppercase;font-size:11px;letter-spacing:.2em;font-weight:750;color:var(--green)}h1{font-size:clamp(28px,5vw,43px);letter-spacing:-.045em;line-height:1.15;margin:12px 0}p{color:var(--muted);margin:10px 0}section{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:20px}.inputs{display:grid;grid-template-columns:1fr 1fr;gap:24px}.country{font-size:19px;font-weight:700;margin-bottom:16px}.country span{display:inline-block;font-size:11px;letter-spacing:.08em;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 6px;margin-right:9px;vertical-align:middle}label{display:block;font-size:13px;font-weight:600;margin:12px 0 6px}input,select{font:inherit;color:var(--ink);background:#fafbf8;border:1px solid #c7d5cc;border-radius:8px;padding:12px;width:100%;min-height:48px}input:focus,select:focus,button:focus-visible,summary:focus-visible{outline:3px solid #94c7ad;outline-offset:2px}.money{display:flex;gap:8px}.money select{width:100px;flex-shrink:0}.money input{min-width:0;font-size:23px;font-weight:650}.hint{font-size:12px;color:var(--muted);margin:7px 0}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}h2{font-size:19px;margin:0}.toolbar select{width:auto;font-size:13px;min-height:40px;padding:8px 30px 8px 12px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{padding:17px 14px;text-align:right;border-bottom:1px solid var(--line)}thead th{font-size:12px;color:var(--muted);font-weight:600}th:first-child{text-align:left;width:32%}tbody th{font-size:14px;font-weight:500}td{font-size:18px;font-weight:600;white-space:nowrap}td small{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:3px}th small{display:block;font-size:11px;color:var(--muted);font-weight:400}.highlight{background:#ecf5ef}.highlight th,.highlight td{color:#15523f;font-weight:750}.total th,.total td{border-bottom:0}.total td{font-size:20px}.settings{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:15px}details{font-size:13px}summary{cursor:pointer;font-weight:650}details p,details li{font-size:13px;color:var(--muted)}details ul{padding-left:20px}a{color:var(--green)}footer{font-size:12px;color:var(--muted)}#error{color:#a12525;font-size:13px}noscript{color:#a12525}@media(max-width:620px){main{padding:30px 14px}section{padding:18px 12px}.inputs{gap:20px;grid-template-columns:1fr}.settings{grid-template-columns:1fr;gap:0}th,td{padding:15px 7px}td{font-size:15px}.total td{font-size:16px}tbody th{font-size:12px}th:first-child{width:30%}}
+input:disabled{background:#e9ece8;color:#78847d;cursor:not-allowed;opacity:1}
+.rate-input{display:flex;align-items:center;gap:14px}.rate-input>input{min-width:0;flex:1}.auto-rate{display:flex;align-items:center;gap:7px;margin:0;min-height:44px;cursor:pointer;white-space:nowrap}.auto-rate input{width:18px;height:18px;min-height:0;padding:0;accent-color:var(--green)}
+.table-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
 </style>
 </head>
 <body>
 <main>
-<header><div class="eyebrow">Across the Causeway</div><h1>Two salaries. One clear comparison.</h1><p>See what reaches your bank account — and what goes into retirement savings.</p></header>
+<header><div class="eyebrow">Across the Causeway</div><h1>Singapore vs Malaysia salary</h1><p>Compare take-home pay and CPF/EPF contributions.</p></header>
 <section aria-label="Salary inputs"><div class="inputs">
-<div><div class="country"><span>SG</span>Singapore</div><label for="sg">Gross monthly salary</label><div class="money"><select id="sgcurrency" aria-label="Singapore salary input currency"><option value="SGD">SGD</option><option value="MYR">MYR</option></select><input id="sg" type="text" maxlength="200" inputmode="text" aria-describedby="arithmetic-help" value="8000"></div><p class="hint">Full CPF rates · age 55 or below</p><label for="sgrelief">Additional annual tax relief (S$)</label><input id="sgrelief" type="text" maxlength="200" inputmode="text" aria-describedby="arithmetic-help" value="0"></div>
-<div><div class="country"><span>MY</span>Malaysia</div><label for="my">Gross monthly salary</label><div class="money"><select id="mycurrency" aria-label="Malaysia salary input currency"><option value="MYR">MYR</option><option value="SGD">SGD</option></select><input id="my" type="text" maxlength="200" inputmode="text" aria-describedby="arithmetic-help" value="20000"></div><label for="mode">Malaysia income tax</label><select id="mode"><option value="progressive">Progressive · resident rates</option><option value="rep">15% flat · Returning Expert Programme</option></select><label for="myrelief">Additional annual tax relief (RM)</label><input id="myrelief" type="text" maxlength="200" inputmode="text" aria-describedby="arithmetic-help" value="0"></div>
-</div><p class="hint" id="arithmetic-help">Arithmetic supported in all value inputs: + − * / and parentheses, e.g. (8000 * 13) / 12. Results update as you type; expressions are saved.</p><p id="error" role="alert" hidden></p></section>
-<section aria-label="Salary comparison"><div class="toolbar"><h2>Your salary breakdown</h2><select id="currency" aria-label="Main display currency"><option value="local">Currency: Local</option><option value="SGD">Currency: SGD</option><option value="MYR">Currency: MYR</option></select><select id="period" aria-label="Results period"><option value="1">Monthly results</option><option value="12">Annual results</option></select></div>
-<div class="table-wrap"><table><caption class="hint" style="text-align:left;padding-bottom:12px">Both currencies shown; choose which currency appears as the main value.</caption><thead><tr><th scope="col">Pay & contributions</th><th scope="col">Singapore</th><th scope="col">Malaysia</th><th scope="col" id="difference-heading">Difference · SGD</th></tr></thead><tbody id="results" aria-live="polite"></tbody></table></div>
-<p class="hint">Difference shows the higher amount, with percentage relative to the lower amount (not a recommendation). Local view compares in SGD. A percentage is unavailable when the lower amount is zero. Monthly tax is annual estimated income tax ÷ 12, rather than actual payroll withholding.</p><noscript>Enable JavaScript to calculate your comparison.</noscript>
+<div><div class="country"><span>SG</span>Singapore</div><label for="sg">Gross monthly salary</label><div class="money"><select id="sgcurrency" aria-label="Singapore salary input currency"><option value="SGD">SGD</option><option value="MYR">MYR</option></select><input id="sg" type="text" maxlength="200" inputmode="text" value="8000"></div><p class="hint">CPF assumes age 55 or below</p><label for="sgrelief">Other yearly tax relief (S$)</label><input id="sgrelief" type="text" maxlength="200" inputmode="text" value="0" aria-describedby="sgrelief-note"><p class="hint" id="sgrelief-note">Already includes S$1,000 earned income relief and CPF relief.</p></div>
+<div><div class="country"><span>MY</span>Malaysia</div><label for="my">Gross monthly salary</label><div class="money"><select id="mycurrency" aria-label="Malaysia salary input currency"><option value="MYR">MYR</option><option value="SGD">SGD</option></select><input id="my" type="text" maxlength="200" inputmode="text" value="20000"></div><label for="mode">Malaysia income tax</label><select id="mode"><option value="progressive">Progressive · resident rates</option><option value="rep">15% flat · Returning Expert Programme</option></select><label for="myrelief">Other yearly tax relief (RM)</label><input id="myrelief" type="text" maxlength="200" inputmode="text" value="0" aria-describedby="myrelief-note"><p class="hint" id="myrelief-note">Already includes RM9,000 personal relief and EPF relief (up to RM4,000).</p></div>
+</div><p id="error" role="alert" hidden></p></section>
+<section aria-label="Salary comparison"><div class="toolbar"><h2>Salary breakdown</h2><div class="table-controls"><select id="currency" aria-label="Main display currency"><option value="local">Currency: Local</option><option value="SGD">Currency: SGD</option><option value="MYR">Currency: MYR</option></select><select id="period" aria-label="Results period"><option value="1">Monthly results</option><option value="12">Annual results</option></select></div></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">Pay & contributions</th><th scope="col">Singapore</th><th scope="col">Malaysia</th><th scope="col" id="difference-heading">Difference · SGD</th></tr></thead><tbody id="results" aria-live="polite"></tbody></table></div>
+<p class="hint">Differences are shown in SGD when you choose Local.</p><noscript>Please turn on JavaScript to use the calculator.</noscript>
 </section>
-<section><details><summary>Exchange rate, assumptions & calculation sources</summary>
-<div class="settings"><div><label for="fx">1 SGD = MYR</label><input id="fx" type="text" maxlength="200" inputmode="text" aria-describedby="arithmetic-help" value="3.30"><p class="hint">Illustrative rate. Set your own; no live feed.</p></div></div>
+<section><details><summary>Exchange rate & how this is calculated</summary>
+<div class="settings"><div><label for="fx">1 SGD = MYR</label><div class="rate-input"><input id="fx" type="text" maxlength="200" inputmode="text" value="3.30"><label class="auto-rate" for="fxmode"><input id="fxmode" type="checkbox" checked> Auto</label></div><p class="hint" id="fxstatus" role="status"></p></div></div>
 <ul>
-<li>Salary inputs may use SGD or MYR; they are converted using the exchange rate below before calculating local tax and contributions. Changing input currency reinterprets the entered number. Tax relief inputs remain in their labeled local currencies. 12 equal monthly salaries, no bonuses or other income. Tax resident in each country. This is a comparison of two separate employment scenarios.</li>
-<li>Singapore: citizen or PR at full CPF rates, age 55 or below. 2026 ordinary-wage ceiling S$8,000/month; employee 20%, employer 17%, with low-wage rules and monthly CPF rounding. Tax uses resident rates from YA 2024 onward, employee CPF relief and S$1,000 earned-income relief. Total personal relief is capped at S$80,000. No one-off tax rebates.</li>
-<li>Malaysia: Malaysian citizen below 60; employee EPF estimated at 11%; employer 13% at wages up to RM5,000, otherwise 12%. These are percentage estimates; statutory KWSP contribution-table bands and rounding can differ from these figures.</li>
-<li>Malaysia tax uses the published YA 2025 resident schedule, RM9,000 personal relief and employee EPF relief up to RM4,000. Progressive mode includes the RM400 individual rebate where chargeable income is at most RM35,000. Additional relief fields exclude those already included.</li>
-<li>REP mode applies 15% to chargeable employment income after the same reliefs. Use only if approved and within your eligible REP period; this calculator does not determine eligibility.</li>
-<li>SOCSO, EIS, insurance, zakat, other deductions and benefits are excluded. Take-home pay = gross − income tax − employee contribution. Total pay after tax incl CPF/EPF = take-home + both contributions (gross − income tax + employer contribution). Employee contributions are already part of gross.</li>
+<li>We compare 12 months of salary, without bonuses or other income, and assume you’re a tax resident in each country. Salaries are converted at the rate above before tax is calculated. Changing the input currency keeps the number you entered. Tax reliefs stay in the currency shown beside them.</li>
+<li>For Singapore, we assume you’re 55 or below and pay full CPF rates: 20% from you and 17% from your employer, on monthly salary up to S$8,000 in 2026. Lower salaries follow CPF’s reduced contribution rules. Tax uses resident rates from YA 2024 onwards, with relief for your CPF contributions and S$1,000 of earned income. Total personal relief is capped at S$80,000. One-off tax rebates aren’t included.</li>
+<li>For Malaysia, we assume you’re a Malaysian citizen under 60. EPF is estimated at 11% from you and 13% from your employer for salaries up to RM5,000, or 12% above that. Your payslip may differ slightly because KWSP uses contribution bands and rounding.</li>
+<li>Malaysia tax uses YA 2025 rates. We include RM9,000 personal relief and up to RM4,000 EPF relief. Progressive tax also includes the RM400 rebate if your chargeable income is RM35,000 or less. Only enter other reliefs in the extra relief fields.</li>
+<li>The 15% REP option applies after reliefs. It assumes you’ve been approved for the programme and are still within its eligible period.</li>
+<li>Take-home pay is salary minus tax and your CPF/EPF contribution. Total pay after tax adds both your contribution and your employer’s back in. SOCSO, EIS, insurance, zakat and other deductions or benefits aren’t included.</li>
+<li>Monthly tax is the yearly estimate divided by 12, so it may differ from payroll deductions. The difference column shows which amount is higher, with the percentage measured against the lower amount. If the lower amount is zero, there’s no percentage to show.</li>
 </ul>
-<p>Sources: <a href="https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates">IRAS tax rates</a> · <a href="https://www.cpf.gov.sg/employer/employer-obligations/how-much-cpf-contributions-to-pay">CPF contributions</a> · <a href="https://www.hasil.gov.my/en/individu/kadar-cukai/">HASiL tax rates</a> · <a href="https://www.hasil.gov.my/individu/pelepasan-cukai/">Malaysia reliefs</a> · <a href="https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution">KWSP contributions</a> · <a href="https://myheart.my/faq-returning-expert-programme/">REP FAQ</a>.</p>
+<p>Sources: <a href="https://github.com/fawazahmed0/exchange-api">Exchange rates</a> · <a href="https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates">IRAS tax rates</a> · <a href="https://www.cpf.gov.sg/employer/employer-obligations/how-much-cpf-contributions-to-pay">CPF contributions</a> · <a href="https://www.hasil.gov.my/en/individu/kadar-cukai/">HASiL tax rates</a> · <a href="https://www.hasil.gov.my/individu/pelepasan-cukai/">Malaysia reliefs</a> · <a href="https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution">KWSP contributions</a> · <a href="https://myheart.my/faq-returning-expert-programme/">REP FAQ</a>.</p>
 </details></section>
-<footer>Planning estimates, not a payslip or tax assessment. Rate assumptions checked 16 November 2026. All calculations run in your browser.</footer>
+
 </main>
 <script id="calculations">
 const SG_BANDS=[[20000,0],[30000,.02],[40000,.035],[80000,.07],[120000,.115],[160000,.15],[200000,.18],[240000,.19],[280000,.195],[320000,.20],[500000,.22],[1000000,.23],[Infinity,.24]];
@@ -97,10 +101,11 @@ function inputValue(id){
  }catch{return NaN;}
 }
 function render(){
+ if($('fxmode').checked && !autoRateReady){$('error').hidden=true;$('results').replaceChildren();return;}
  const fields=['sg','my','sgrelief','myrelief','fx'];
  const valid=fields.every(id=>Number.isFinite(inputValue(id)));
  $('error').hidden=valid;
- if(!valid){$('error').textContent='Enter a complete arithmetic expression with a non-negative result (up to 100,000,000). Exchange rate must be between 0.0001 and 1,000; division by zero is not allowed.';$('results').replaceChildren();return;}
+ if(!valid){$('error').textContent='Check your entries. Salaries and reliefs must be between 0 and 100,000,000, and the exchange rate between 0.0001 and 1,000. If you’re using a formula, make sure it’s complete and doesn’t divide by zero.';$('results').replaceChildren();return;}
  const fx=inputValue('fx');
  const sgSalary=inputValue('sg')/($('sgcurrency').value==='MYR'?fx:1);
  const mySalary=inputValue('my')*($('mycurrency').value==='SGD'?fx:1);
@@ -122,13 +127,13 @@ function render(){
   const myCommon=differenceCurrency==='SGD'?myAmount/fx:myAmount;
   const diff=difference(sgCommon,myCommon);
   if(!diff.country)return 'Equal<small>0.0%</small>';
-  const percent=diff.percent===null?'N/A (zero baseline)':`+${diff.percent.toLocaleString('en-SG',{minimumFractionDigits:1,maximumFractionDigits:1})}%`;
+  const percent=diff.percent===null?'—':`+${diff.percent.toLocaleString('en-SG',{minimumFractionDigits:1,maximumFractionDigits:1})}%`;
   return `${diff.country}, +${diff.amount.toLocaleString('en-SG',{maximumFractionDigits:0})}<small>${percent}</small>`;
  };
  $('results').innerHTML=rows.map(([key,label,note])=>`<tr class="${key==='takeHome'?'highlight':key==='netTotal'?'total':''}"><th scope="row">${label}<small>${note}</small></th><td>${cell(sg[key]*multiplier,'SGD')}</td><td>${cell(my[key]*multiplier,'MYR')}</td><td>${differenceCell(sg[key]*multiplier,my[key]*multiplier)}</td></tr>`).join('');
 }
 const STORAGE_KEY='causeway-salary-inputs-v1';
-const savedFields=['sg','my','sgrelief','myrelief','fx','mode','period','currency','sgcurrency','mycurrency'];
+const savedFields=['sg','my','sgrelief','myrelief','fx','mode','period','currency','sgcurrency','mycurrency','fxmode'];
 function restoreInputs(){
  try{
   const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -136,6 +141,7 @@ function restoreInputs(){
   for(const id of savedFields){
    if(typeof saved[id]!=='string')continue;
    const el=$(id),fallback=el.value;
+   if(id==='fxmode'){el.checked=saved[id]==='auto';continue;}
    if(el.tagName==='SELECT' && !Array.from(el.options).some(option=>option.value===saved[id]))continue;
    el.value=saved[id];
    if(el.tagName==='INPUT' && (!Number.isFinite(inputValue(id))))el.value=fallback;
@@ -144,11 +150,80 @@ function restoreInputs(){
 }
 function saveInputs(){
  try{
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(Object.fromEntries(savedFields.map(id=>[id,$(id).value]))));
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(Object.fromEntries(savedFields.map(id=>[id,id==='fx'?manualRate:id==='fxmode'?($('fxmode').checked?'auto':'manual'):$(id).value]))));
  }catch{ /* Calculations still work if browser storage is unavailable. */ }
 }
+const RATE_CACHE_KEY='causeway-sgd-myr-daily-v1';
+let manualRate,autoRateReady=false,memoryRate=null,rateRequest=null;
+function localDay(){
+ const date=new Date();
+ return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+function validRate(cache,day){
+ return cache && cache.day===day && typeof cache.rate==='number' && Number.isFinite(cache.rate) && cache.rate>=0.0001 && cache.rate<=1000;
+}
+async function dailyRate(){
+ const day=localDay();
+ if(validRate(memoryRate,day))return memoryRate;
+ try{
+  const cached=JSON.parse(localStorage.getItem(RATE_CACHE_KEY));
+  if(validRate(cached,day)){memoryRate=cached;return cached;}
+ }catch{ /* Fetch when the saved rate is missing or unreadable. */ }
+ if(rateRequest?.day===day)return rateRequest.promise;
+ const promise=(async()=>{
+  const urls=[
+   'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/sgd.json',
+   'https://latest.currency-api.pages.dev/v1/currencies/sgd.json'
+  ];
+  for(const url of urls){
+   try{
+    const response=await fetch(url,{signal:AbortSignal.timeout(10000)});
+    if(!response.ok)throw Error('Rate unavailable');
+    const data=await response.json();
+    const cache={day,rate:data?.sgd?.myr,date:data?.date};
+    if(!validRate(cache,day))throw Error('Invalid rate');
+    memoryRate=cache;
+    try{localStorage.setItem(RATE_CACHE_KEY,JSON.stringify(cache));}catch{ /* Keep the rate in memory if storage is full or blocked. */ }
+    return cache;
+   }catch{ /* Try the provider’s backup endpoint. */ }
+  }
+  throw Error('Rate unavailable');
+ })();
+ rateRequest={day,promise};
+ try{return await promise;}finally{if(rateRequest?.promise===promise)rateRequest=null;}
+}
+async function updateRateMode(){
+ const automatic=$('fxmode').checked;
+ $('fx').disabled=automatic;
+ autoRateReady=false;
+ if(!automatic){
+  $('fx').value=manualRate;
+  $('fxstatus').textContent='';
+  saveInputs();render();return;
+ }
+ $('fxstatus').textContent='Loading…';
+ render();
+ try{
+  const cache=await dailyRate();
+  if(!$('fxmode').checked)return;
+  $('fx').value=String(cache.rate);
+  autoRateReady=true;
+  const rateDate=typeof cache.date==='string' && /^\d{4}-\d{2}-\d{2}$/.test(cache.date)?cache.date:'';
+  $('fxstatus').textContent=rateDate?`Rate as of ${rateDate}`:'';
+ }catch{
+  if(!$('fxmode').checked)return;
+  $('fxmode').checked=false;$('fx').disabled=false;$('fx').value=manualRate;
+  $('fxstatus').textContent='Couldn’t load the rate. Please try again.';
+ }
+ saveInputs();render();
+}
 restoreInputs();
-document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',()=>{saveInputs();render();}));
-render();
+manualRate=$('fx').value;
+document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',()=>{
+ if(el===$('fxmode')){saveInputs();return updateRateMode();}
+ if(el===$('fx') && !$('fxmode').checked)manualRate=el.value;
+ saveInputs();render();
+}));
+if($('fxmode').checked)updateRateMode();else render();
 </script>
 </body></html>

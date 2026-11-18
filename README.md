@@ -4,7 +4,7 @@ Open `index.html` in your browser. It is a self-contained page with no dependenc
 
 All value inputs accept arithmetic using `+`, `-`, `*`, `/` and parentheses, for example `(8000 * 13) / 12`. Expressions calculate live and remain saved after refresh.
 
-Enter either gross monthly salary in SGD or MYR using its currency selector. Values are converted to local currency before calculating tax and contributions. All inputs and currency selections are saved locally for your next visit. Switch Malaysia between resident progressive income tax and the approved Returning Expert Programme 15% rate. Results include after-tax salary, employee contributions, take-home pay, employer contributions, and total compensation. Switch results between monthly and annual, and expand the assumptions to edit the illustrative exchange rate.
+Enter either gross monthly salary in SGD or MYR using its currency selector. Values are converted to local currency before calculating tax and contributions. All inputs and currency selections are saved locally for your next visit. Switch Malaysia between resident progressive income tax and the approved Returning Expert Programme 15% rate. Results include after-tax salary, employee contributions, take-home pay, employer contributions, and total compensation. Switch results between monthly and annual, and expand the exchange-rate section to choose Manual or Auto. Manual keeps your own rate (including arithmetic). Auto fetches SGD–MYR from [exchange-api](https://github.com/fawazahmed0/exchange-api) when first used that day, then reuses the cached rate for the rest of the day, including after refresh. Days follow your browser’s local date. The rate field is disabled in Auto mode; switching to Manual restores your entered value. A failed fetch returns to Manual.
 
 ## Assumptions
 
@@ -21,6 +21,6 @@ Total pay after tax incl CPF/EPF means take-home pay plus employee and employer 
 
 ## Calculation checks
 
-Run `node calculator.test.cjs` and `node calculator-ui.test.cjs` (Node.js, no packages required).
+Run `node calculator.test.cjs` , `node calculator-ui.test.cjs` and `node exchange-rate.test.cjs` (Node.js, no packages required).
 
 Official calculation sources are linked in the page. Estimates are for comparison, not payroll or tax filing.
